@@ -1,3 +1,4 @@
+import logging
 from sqlalchemy import Table, MetaData, Column, Integer, String, Date, ForeignKey
 from sqlalchemy.orm import mapper, relationship
 
@@ -33,12 +34,19 @@ allocations = Table(
 )
 
 def start_mappers():
+    logging.debug("starting mappers")
     lines_mapper = mapper(model.OrderLine, order_lines)
     mapper(
         model.Batch,
         batches,
         properties={
             "_allocations": relationship(
-                lines_mapper, secondary=allocations, collection_class=set)
+                lines_mapper,
+                secondary=allocations,
+                collection_class=set,
+            )
         },
     )
+    # mapper(model.Product,
+    #        products,
+    #        properties={"batches": relationship(batches_matcher)})
