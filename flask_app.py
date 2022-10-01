@@ -26,8 +26,11 @@ def allocate_endpoint():
     line = model.OrderLine(
         request.json["orderid"],
         request.json["sku"],
-        request.json["qty"]
+        request.json["qty"],
     )
+    try:
+        batchref = services.allocate(line, repo, session)
+    except (model.OutOfStock, services.InvalidSku) as e:
+        return {"message": str(e)}, 400
 
-    batchref = services.allocate(line, repo, session)
     return {"batchref": batchref}, 201
