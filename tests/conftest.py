@@ -9,7 +9,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.exc import OperationalError
 from sqlalchemy.orm import sessionmaker, clear_mappers
 
-from orm import metadata, start_mappers
+from adapters.orm import metadata, start_mappers
 import config
 
 logging.basicConfig(level=logging.INFO, format="%(lineno)d\t%(message)s")

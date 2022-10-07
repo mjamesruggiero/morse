@@ -1,6 +1,6 @@
-import repository
-import model
-import services
+from adapters import repository
+from domain import model
+from service_layer import services
 
 class FakeRepository(repository.AbstractRepository):
     def __init__(self, batches):

@@ -1,6 +1,6 @@
 #pylint: disable=protected-access
-import model
-import repository
+from domain import model
+from adapters import repository
 import logging
 
 logging.basicConfig(level=logging.DEBUG, format="%(lineno)d\t%(message)s")
